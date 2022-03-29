@@ -2,7 +2,7 @@
 
 ## 🔎**How to Install**🔍
 * Clone project to your folder: `https://github.com/amarjin6/php-gifts.git`
-* Install PHP interpreter: `https://www.php.net/manual/en/install.php`
+* Install PHP [interpreter](https://www.php.net/manual/en/install.php)
 * **Enjoy!**
 
 ## 🛠**How to Use**🛠
