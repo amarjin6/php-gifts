@@ -1,4 +1,4 @@
-# 🔮**Basic PHP operations**🔮
+# 🔮**OOP in PHP**🔮
 * ## **Task 1 description**
     ****
     Create a FormBuilder class that will allow you to generate an HTML form. For example, this use of your class:</br>
