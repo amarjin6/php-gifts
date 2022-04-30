@@ -1,47 +1,54 @@
 <?php
+error_reporting(0);
 
-// Store a string into the variable which
-// need to be Encrypted
-$simple_string = "Welcome to GeeksforGeeks";
+class Cipher
+{
+    public function Encrypt(string $key, string $text)
+    {
+        return openssl_encrypt($text, "camellia-192-cbc", $key);
+    }
+    
+    public function Decrypt(string $key, string $text)
+    {
+        return openssl_decrypt($text, "camellia-192-cbc", $key);
+    }
+}
 
-// Display the original string
-echo "Original String: " . $simple_string . "\n";
+class CryptoManager
+{
+    private string $key;
+    
+    private Cipher $cipher;
+    
+    
+    public function __construct(string $key, Cipher $algo)
+    {
+        $this->key = $key;
+        $this->cipher = $algo;
+    }
+    
+    
+    public function Encrypt(string $text)
+    {
+        return $this->cipher->Encrypt($this->key, $text);
+    }
+    
+    public function Decrypt(string $text)
+    {
+        return $this->cipher->Decrypt($this->key, $text);
+    }
+}
 
-// Store cipher method
-$ciphering = "BF-CBC";
+$text = "TextToEncrypt";
+$key = "KEY";
+echo "Plain text: ", $text, "<br>", "Key: ", $key, "<br><br>";
 
-// Use OpenSSl encryption method
-$iv_length = openssl_cipher_iv_length($ciphering);
-$options = 0;
+$manager = new CryptoManager($key, new Cipher());
 
-// Use random_bytes() function which gives
-// randomly 16 digit values
-$encryption_iv = random_bytes($iv_length);
+$encrText = $manager->Encrypt($text);
+echo "Encrypted text: ", $encrText, "<br>";
 
-// Alternatively, we can use any 16 digit
-// characters or numeric for iv
-$encryption_key = openssl_digest(php_uname(), 'MD5', TRUE);
-
-// Encryption of string process starts
-$encryption = openssl_encrypt($simple_string, $ciphering,
-    $encryption_key, $options, $encryption_iv);
-
-// Display the encrypted string
-echo "Encrypted String: " . $encryption . "\n";
-
-// Decryption of string process starts
-// Used random_bytes() which gives randomly
-// 16 digit values
-$decryption_iv = random_bytes($iv_length);
-
-// Store the decryption key
-$decryption_key = openssl_digest(php_uname(), 'MD5', TRUE);
-
-// Descrypt the string
-$decryption = openssl_decrypt($encryption, $ciphering,
-    $decryption_key, $options, $encryption_iv);
-
-// Display the decrypted string
-echo "Decrypted String: " . $decryption;
+$decrText = $manager->Decrypt($encrText);
+echo "Decrypted text: ", $decrText, "<br>";
 
 ?>
