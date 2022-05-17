@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 class FileManager
 {
 
@@ -74,13 +74,21 @@ class FileManager
         echo "<form method='post' enctype='multipart/form-data'>
           Choose file:
           <br>
-          <input type='file' name='filename' size='10' />
+          <input type='file' name='filename' size='10' value='Choose file' style='
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          '/>
           <br>
           <input type='submit' name='upload' value='Upload' style='  border: none;
             background-color: dodgerblue;
             color: white;
             margin-top: 5px;
-            margin-left: 60px;
             padding: 5px 20px;
             text-align: center;
             text-decoration: none;
